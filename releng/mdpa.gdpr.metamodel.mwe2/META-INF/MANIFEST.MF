@@ -17,4 +17,5 @@ Require-Bundle: org.eclipse.emf,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
  tools.mdsd.ecoreworkflow.mwe2lib,
- tools.mdsd.modelingfoundations.identifier;visibility:=reexport
+ tools.mdsd.modelingfoundations.identifier;visibility:=reexport,
+ mdpa.laf.referencemodel;bundle-version="0.1.0"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="GDPR" nsURI="http://www.example.org/GDPR" nsPrefix="GDPR">
-  <eClassifiers xsi:type="ecore:EClass" name="Processing" eSuperTypes="#//AbstractGDPRElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Processing" eSuperTypes="../../mdpa.laf.referencemodel/model/LAF.ecore#//Action">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputData" upperBound="-1"
         eType="#//Data"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputData" upperBound="-1"
@@ -19,13 +19,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="Transferring" eSuperTypes="#//Processing"/>
   <eClassifiers xsi:type="ecore:EClass" name="Usage" eSuperTypes="#//Processing"/>
   <eClassifiers xsi:type="ecore:EClass" name="Storing" eSuperTypes="#//Processing"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Data" eSuperTypes="#//AbstractGDPRElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Data" eSuperTypes="../../mdpa.laf.referencemodel/model/LAF.ecore#//LegalObject"/>
   <eClassifiers xsi:type="ecore:EClass" name="PersonalData" eSuperTypes="#//Data">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataReferences" lowerBound="1"
         upperBound="-1" eType="#//NaturalPerson"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Purpose" eSuperTypes="#//AbstractGDPRElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LegalBasis" eSuperTypes="#//AbstractGDPRElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Purpose" eSuperTypes="../../mdpa.laf.referencemodel/model/LAF.ecore#//LegalContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LegalBasis" eSuperTypes="../../mdpa.laf.referencemodel/model/LAF.ecore#//LegalContext">
     <eStructuralFeatures xsi:type="ecore:EReference" name="personalData" eType="#//PersonalData"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="forPurpose" lowerBound="1"
         upperBound="-1" eType="#//Purpose"/>
@@ -39,9 +39,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="consentee" lowerBound="1"
         eType="#//NaturalPerson"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NaturalPerson" eSuperTypes="#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NaturalPerson" eSuperTypes="../../mdpa.laf.referencemodel/model/LAF.ecore#//LegalContext"/>
   <eClassifiers xsi:type="ecore:EClass" name="Controller" eSuperTypes="#//Role"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//AbstractGDPRElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="../../mdpa.laf.referencemodel/model/LAF.ecore#//LegalSubject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ThirdParty" eSuperTypes="#//Role"/>
@@ -57,7 +57,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="involvedParties" upperBound="-1"
         eType="#//Role" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractGDPRElement" abstract="true"
-      eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity"/>
   <eClassifiers xsi:type="ecore:EClass" name="Obligation" eSuperTypes="#//LegalBasis"/>
 </ecore:EPackage>

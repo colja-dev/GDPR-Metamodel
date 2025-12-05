@@ -7,12 +7,13 @@ Bundle-Version: 0.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: mdpa.gdpr.metamodel.contextproperties,
  mdpa.gdpr.metamodel.contextproperties.impl,
  mdpa.gdpr.metamodel.contextproperties.util
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  mdpa.gdpr.metamodel;visibility:=reexport,
  tools.mdsd.modelingfoundations.identifier;visibility:=reexport,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ mdpa.laf.referencemodel;bundle-version="0.1.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy

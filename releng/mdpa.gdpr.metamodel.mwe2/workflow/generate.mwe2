@@ -21,6 +21,15 @@ Workflow {
 			from = "platform:/plugin/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore"
 			to = "platform:/resource/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore"
 		}
+		
+		uriMap = {
+			from = "platform:/plugin/mdpa.laf.referencemodel/model/LAF.genmodel"
+			to = "platform:/resource/mdpa.laf.referencemodel/model/LAF.genmodel"
+		}
+		uriMap = {
+			from = "platform:/plugin/mdpa.laf.referencemodel/model/LAF.ecore"
+			to = "platform:/resource/mdpa.laf.referencemodel/model/LAF.ecore"
+		}
 	}
 
 	component = EcoreGenerator {

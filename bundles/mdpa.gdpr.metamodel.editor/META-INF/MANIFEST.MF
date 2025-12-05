@@ -17,5 +17,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport,
- tools.mdsd.modelingfoundations.identifier.edit;visibility:=reexport
+ tools.mdsd.modelingfoundations.identifier.edit;visibility:=reexport,
+ mdpa.laf.referencemodel.edit;bundle-version="1.0.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy

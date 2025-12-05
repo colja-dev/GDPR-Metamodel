@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import mdpa.gdpr.metamodel.GDPR.AbstractGDPRElement;
 import mdpa.gdpr.metamodel.GDPR.Controller;
 import mdpa.gdpr.metamodel.GDPR.Data;
 import mdpa.gdpr.metamodel.GDPR.LegalAssessmentFacts;
@@ -23,6 +22,7 @@ import mdpa.gdpr.metamodel.contextproperties.ContextDependentProperties;
 import mdpa.gdpr.metamodel.contextproperties.Property;
 import mdpa.gdpr.metamodel.contextproperties.PropertyAnnotation;
 import mdpa.gdpr.metamodel.contextproperties.PropertyValue;
+import mdpa.laf.referencemodel.LAF.AssessmentFact;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
@@ -55,7 +55,7 @@ public class GDPRMetamodelApi {
 	private Map<String, PropertyValue> id2PropertyValue = new HashMap<>();
 	private Map<String, PropertyAnnotation> id2PropertyAnnotation = new HashMap<>();
 	private Map<String, ContextAnnotation> id2ContextAnnotation = new HashMap<>();
-	private Map<AbstractGDPRElement, List<PropertyAnnotation>> annotatedElement2PropertyAnnotation = new HashMap<>();
+	private Map<AssessmentFact, List<PropertyAnnotation>> annotatedElement2PropertyAnnotation = new HashMap<>();
 	
 	public GDPRMetamodelApi(URI gdprModelPath, Optional<URI> contextPropertiesModel) {
 		if(EMFPlugin.IS_ECLIPSE_RUNNING) {
@@ -112,7 +112,7 @@ public class GDPRMetamodelApi {
 				for(ContextAnnotation contextAnnotation : propertyAnnotation.getContextannotation()) {
 					this.id2ContextAnnotation.put(contextAnnotation.getId(), contextAnnotation);
 				}
-				AbstractGDPRElement annotatedElement = propertyAnnotation.getAnnotatedElement();
+				AssessmentFact annotatedElement = propertyAnnotation.getAnnotatedElement();
 				if(!this.annotatedElement2PropertyAnnotation.containsKey(annotatedElement)) {
 					this.annotatedElement2PropertyAnnotation.put(annotatedElement, new ArrayList<>());
 				}
@@ -121,7 +121,7 @@ public class GDPRMetamodelApi {
 		}
 	}
 	
-	public List<PropertyAnnotation> getPropertyAnnotations(AbstractGDPRElement element) {
+	public List<PropertyAnnotation> getPropertyAnnotations(AssessmentFact element) {
 		List<PropertyAnnotation> annotations = this.annotatedElement2PropertyAnnotation.get(element);
 		if(annotations == null) {
 			return List.of();

@@ -16,7 +16,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
         eType="#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotatedElement" lowerBound="1"
-        eType="ecore:EClass ../../mdpa.gdpr.metamodel/model/GDPR.ecore#//AbstractGDPRElement"/>
+        eType="ecore:EClass ../../mdpa.laf.referencemodel/model/LAF.ecore#//AssessmentFact"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContextAnnotation" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyvalue" lowerBound="1"
@@ -50,6 +50,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GDPRContextElement" eSuperTypes="#//ContextElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="gdprElement" lowerBound="1"
-        eType="ecore:EClass ../../mdpa.gdpr.metamodel/model/GDPR.ecore#//AbstractGDPRElement"/>
+        eType="ecore:EClass ../../mdpa.laf.referencemodel/model/LAF.ecore#//AssessmentFact"/>
   </eClassifiers>
 </ecore:EPackage>

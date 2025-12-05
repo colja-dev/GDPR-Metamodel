@@ -8,7 +8,7 @@ Bundle-ClassPath: .
 Bundle-Activator: mdpa.gdpr.metamodel.contextproperties.provider.ContextpropertiesEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: mdpa.gdpr.metamodel.contextproperties.provider
 Require-Bundle: org.eclipse.core.runtime,
  mdpa.gdpr.metamodel.contextproperties;visibility:=reexport,
@@ -16,5 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  mdpa.gdpr.metamodel;visibility:=reexport,
  mdpa.gdpr.metamodel.edit;visibility:=reexport,
  tools.mdsd.modelingfoundations.identifier;visibility:=reexport,
- tools.mdsd.modelingfoundations.identifier.edit;visibility:=reexport
+ tools.mdsd.modelingfoundations.identifier.edit;visibility:=reexport,
+ mdpa.laf.referencemodel;bundle-version="0.1.0";visibility:=reexport,
+ mdpa.laf.referencemodel.edit;bundle-version="1.0.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy

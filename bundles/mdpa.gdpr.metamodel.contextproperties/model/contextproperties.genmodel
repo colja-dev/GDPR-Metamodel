@@ -9,7 +9,7 @@
     reflectiveDelegation="true" codeFormatting="true" testsDirectory="/mdpa.gdpr.metamodel.contextproperties.tests/src-gen"
     testSuiteClass="mdpa.gdpr.metamodel.contextproperties.tests.ContextpropertiesAllTests"
     importerID="org.eclipse.emf.importer.ecore" featureDelegation="Reflective" complianceLevel="5.0"
-    copyrightFields="false" usedGenPackages="../../mdpa.gdpr.metamodel/model/GDPR.genmodel#//GDPR ../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier"
+    copyrightFields="false" usedGenPackages="../../mdpa.gdpr.metamodel/model/GDPR.genmodel#//GDPR ../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier ../../mdpa.laf.referencemodel/model/LAF.genmodel#//LAF"
     operationReflection="true" importOrganizing="true">
   <foreignModel>contextproperties.ecore</foreignModel>
   <genPackages prefix="Contextproperties" basePackage="mdpa.gdpr.metamodel" disposableProviderFactory="true"

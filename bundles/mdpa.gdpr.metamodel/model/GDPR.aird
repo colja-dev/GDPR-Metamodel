@@ -5,6 +5,8 @@
     <semanticResources>GDPR.genmodel</semanticResources>
     <semanticResources>platform:/resource/tools.mdsd.modelingfoundations.identifier/model/identifier.ecore</semanticResources>
     <semanticResources>platform:/resource/tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel</semanticResources>
+    <semanticResources>platform:/resource/mdpa.laf.referencemodel/model/LAF.ecore</semanticResources>
+    <semanticResources>platform:/resource/mdpa.laf.referencemodel/model/LAF.genmodel</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_U3NTMNh6Ee2tqa1Vqp-1xw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_U6iUANh6Ee2tqa1Vqp-1xw" name="GDPR" repPath="#_U5gZQNh6Ee2tqa1Vqp-1xw" changeId="92c24ccf-4eb4-4d6f-a5c5-fcf5d84bda12">

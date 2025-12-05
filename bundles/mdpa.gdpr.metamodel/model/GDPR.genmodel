@@ -7,7 +7,7 @@
     suppressEMFTypes="true" reflectiveDelegation="true" codeFormatting="true" testsDirectory="/mdpa.gdpr.metamodel.tests/src-gen"
     testSuiteClass="mdpa.gdpr.metamodel.tests.GDPRAllTests" importerID="org.eclipse.emf.importer.ecore"
     featureDelegation="Reflective" complianceLevel="5.0" copyrightFields="false" editPluginID="mdpa.gdpr.metamodel.edit"
-    editorPluginID="mdpa.gdpr.metamodel.editor" usedGenPackages="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier"
+    editorPluginID="mdpa.gdpr.metamodel.editor" usedGenPackages="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier ../../mdpa.laf.referencemodel/model/LAF.genmodel#//LAF"
     operationReflection="true" importOrganizing="true">
   <foreignModel>GDPR.ecore</foreignModel>
   <genPackages prefix="GDPR" basePackage="mdpa.gdpr.metamodel" disposableProviderFactory="true"
@@ -40,8 +40,7 @@
     <genClasses ecoreClass="GDPR.ecore#//Consent" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference GDPR.ecore#//Consent/consentee"/>
     </genClasses>
-    <genClasses ecoreClass="GDPR.ecore#//NaturalPerson">
-    </genClasses>
+    <genClasses ecoreClass="GDPR.ecore#//NaturalPerson"/>
     <genClasses ecoreClass="GDPR.ecore#//Controller"/>
     <genClasses ecoreClass="GDPR.ecore#//Role">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GDPR.ecore#//Role/name"/>
@@ -54,7 +53,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GDPR.ecore#//LegalAssessmentFacts/legalBases"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference GDPR.ecore#//LegalAssessmentFacts/involvedParties"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="GDPR.ecore#//AbstractGDPRElement" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
     <genClasses ecoreClass="GDPR.ecore#//Obligation" labelFeature="../../tools.mdsd.modelingfoundations.identifier/model/identifier.genmodel#//identifier/NamedElement/entityName"/>
   </genPackages>
 </genmodel:GenModel>
