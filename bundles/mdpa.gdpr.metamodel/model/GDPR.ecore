@@ -39,22 +39,25 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="consentee" lowerBound="1"
         eType="#//NaturalPerson"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NaturalPerson" eSuperTypes="../../mdpa.laf.referencemodel/model/LAF.ecore#//LegalContext"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NaturalPerson" eSuperTypes="../../mdpa.laf.referencemodel/model/LAF.ecore#//LegalContext">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Controller" eSuperTypes="#//Role"/>
   <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="../../mdpa.laf.referencemodel/model/LAF.ecore#//LegalSubject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ThirdParty" eSuperTypes="#//Role"/>
   <eClassifiers xsi:type="ecore:EClass" name="LegalAssessmentFacts" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="processing" upperBound="-1"
-        eType="#//Processing" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="purposes" upperBound="-1"
-        eType="#//Purpose" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="data" upperBound="-1" eType="#//Data"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="ecore:EClass ../../mdpa.laf.referencemodel/model/LAF.ecore#//Action"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="legalBases" upperBound="-1"
-        eType="#//LegalBasis" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="involvedParties" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objects" upperBound="-1"
+        eType="ecore:EClass ../../mdpa.laf.referencemodel/model/LAF.ecore#//LegalObject"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" upperBound="-1"
+        eType="ecore:EClass ../../mdpa.laf.referencemodel/model/LAF.ecore#//LegalContext"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subjects" upperBound="-1"
         eType="#//Role" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Obligation" eSuperTypes="#//LegalBasis"/>
