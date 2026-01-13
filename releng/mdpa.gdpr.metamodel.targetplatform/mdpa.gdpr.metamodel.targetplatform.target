@@ -62,7 +62,7 @@
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="false" type="InstallableUnit">
 			<repository location="https://model-based-data-protection-assessments.github.io/updatesite/nightly/laf-referencemodel/"/>
-			<unit id="mdpa.laf.referencemodel.feature.feature.group" version="1.0.0.202512280316"/>
+			<unit id="mdpa.laf.referencemodel.feature.feature.group" version="0.0.0"/>
 		</location>
 	</locations>
 </target>
