@@ -17,12 +17,13 @@ import mdpa.gdpr.metamodel.GDPR.Processing;
 import mdpa.gdpr.metamodel.GDPR.Purpose;
 import mdpa.gdpr.metamodel.GDPR.Role;
 import mdpa.gdpr.metamodel.GDPR.ThirdParty;
-import mdpa.gdpr.metamodel.contextproperties.ContextAnnotation;
-import mdpa.gdpr.metamodel.contextproperties.ContextDependentProperties;
-import mdpa.gdpr.metamodel.contextproperties.Property;
-import mdpa.gdpr.metamodel.contextproperties.PropertyAnnotation;
-import mdpa.gdpr.metamodel.contextproperties.PropertyValue;
+import mdpa.gdpr.metamodel.contextproperties.Expression;
+import mdpa.gdpr.metamodel.contextproperties.SAFAnnotation;
+import mdpa.gdpr.metamodel.contextproperties.ScopeDependentAssessmentFact;
+import mdpa.gdpr.metamodel.contextproperties.ScopeDependentAssessmentFacts;
+import mdpa.gdpr.metamodel.contextproperties.ScopeSet;
 import mdpa.laf.referencemodel.LAF.AssessmentFact;
+import mdpa.laf.referencemodel.LAF.LegalContext;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
@@ -41,7 +42,7 @@ public class GDPRMetamodelApi {
 	private ResourceSet resources = new ResourceSetImpl();
 	
 	private LegalAssessmentFacts legalAssessmentFacts = null;
-	private Optional<ContextDependentProperties> optContextDependentProperties = Optional.empty();
+	private Optional<ScopeDependentAssessmentFacts> optScopeDependentAssessmentFacts = Optional.empty();
 	
 	private Map<String, Processing> id2ProcessingMap = new HashMap<>();
 	private Map<String, Purpose> id2PurposeMap = new HashMap<>();
@@ -51,11 +52,11 @@ public class GDPRMetamodelApi {
 	private Map<String, Controller> id2ControllerMap = new HashMap<>();
 	private Map<String, ThirdParty> id2ThirdPartyMap = new HashMap<>();
 	
-	private Map<String, Property> id2Property = new HashMap<>();
-	private Map<String, PropertyValue> id2PropertyValue = new HashMap<>();
-	private Map<String, PropertyAnnotation> id2PropertyAnnotation = new HashMap<>();
-	private Map<String, ContextAnnotation> id2ContextAnnotation = new HashMap<>();
-	private Map<AssessmentFact, List<PropertyAnnotation>> annotatedElement2PropertyAnnotation = new HashMap<>();
+	private Map<String, ScopeDependentAssessmentFact> id2ScopeDependentAssessmentFact = new HashMap<>();
+	private Map<String, Expression> id2Expression = new HashMap<>();
+	private Map<String, SAFAnnotation> id2SAFAnnotation = new HashMap<>();
+	private Map<String, ScopeSet> id2ScopeSet = new HashMap<>();
+	private Map<AssessmentFact, List<SAFAnnotation>> annotatedElement2SAFAnnotation = new HashMap<>();
 	
 	public GDPRMetamodelApi(URI gdprModelPath, Optional<URI> contextPropertiesModel) {
 		if(EMFPlugin.IS_ECLIPSE_RUNNING) {
@@ -75,22 +76,25 @@ public class GDPRMetamodelApi {
 	}
 	
 	public void initializeMappings() {
-		for(Processing process : this.legalAssessmentFacts.getProcessing()) {
-			this.id2ProcessingMap.put(process.getId(), process);
+		this.legalAssessmentFacts.getActions().stream()
+			.filter(Processing.class::isInstance)
+			.map(Processing.class::cast)
+			.forEach(process -> this.id2ProcessingMap.put(process.getId(), process));
+		this.legalAssessmentFacts.getObjects().stream()
+			.filter(Data.class::isInstance)
+			.map(Data.class::cast)
+			.forEach(data -> this.id2DataMap.put(data.getId(), data));
+		for(LegalContext context : this.legalAssessmentFacts.getContext()) {
+			if(context instanceof Purpose) {
+				this.id2PurposeMap.put(context.getId(), (Purpose) context);
+			} else if (context instanceof LegalBasis) {
+				this.id2LegalBasisMap.put(context.getId(), (LegalBasis) context);
+			} else if (context instanceof NaturalPerson) {
+				this.id2NaturalPersonMap.put(context.getId(), (NaturalPerson) context);
+			}
 		}
-		for(Purpose purpose : this.legalAssessmentFacts.getPurposes()) {
-			this.id2PurposeMap.put(purpose.getId(), purpose);
-		}
-		for(LegalBasis basis : this.legalAssessmentFacts.getLegalBases()) {
-			this.id2LegalBasisMap.put(basis.getId(), basis);
-		}
-		for(Data data : this.legalAssessmentFacts.getData()) {
-			this.id2DataMap.put(data.getId(), data);
-		}
-		for(Role role : this.legalAssessmentFacts.getInvolvedParties()) {
-			if(role instanceof NaturalPerson) {
-				this.id2NaturalPersonMap.put(role.getId(), (NaturalPerson) role);
-			} else if (role instanceof Controller) {
+		for(Role role : this.legalAssessmentFacts.getSubjects()) {
+			if (role instanceof Controller) {
 				this.id2ControllerMap.put(role.getId(), (Controller) role);
 			} else if (role instanceof ThirdParty) {
 				this.id2ThirdPartyMap.put(role.getId(), (ThirdParty) role);
@@ -98,44 +102,44 @@ public class GDPRMetamodelApi {
 				// should never occur and is currently not mapped
 			}
 		}
-		
-		if(optContextDependentProperties.isPresent()) {
-			ContextDependentProperties contextDependentProperties = optContextDependentProperties.get();
-			for(Property property : contextDependentProperties.getProperty()) {
-				this.id2Property.put(property.getId(), property);
-				for(PropertyValue propertyValue : property.getPropertyvalue()) {
-					this.id2PropertyValue.put(propertyValue.getId(), propertyValue);
+
+		if(optScopeDependentAssessmentFacts.isPresent()) {
+			ScopeDependentAssessmentFacts scopeDependentAssessmentFacts = optScopeDependentAssessmentFacts.get();
+			for(ScopeDependentAssessmentFact fact : scopeDependentAssessmentFacts.getScopeDependentAssessmentFact()) {
+				this.id2ScopeDependentAssessmentFact.put(fact.getId(), fact);
+				for(Expression expression : fact.getExpression()) {
+					this.id2Expression.put(expression.getId(), expression);
 				}
 			}
-			for(PropertyAnnotation propertyAnnotation : contextDependentProperties.getPropertyannotation()) {
-				this.id2PropertyAnnotation.put(propertyAnnotation.getId(), propertyAnnotation);
-				for(ContextAnnotation contextAnnotation : propertyAnnotation.getContextannotation()) {
-					this.id2ContextAnnotation.put(contextAnnotation.getId(), contextAnnotation);
+			for(SAFAnnotation safAnnotation : scopeDependentAssessmentFacts.getSafAnnotation()) {
+				this.id2SAFAnnotation.put(safAnnotation.getId(), safAnnotation);
+				for(ScopeSet scopeSet : safAnnotation.getScopeSet()) {
+					this.id2ScopeSet.put(scopeSet.getId(), scopeSet);
 				}
-				AssessmentFact annotatedElement = propertyAnnotation.getAnnotatedElement();
-				if(!this.annotatedElement2PropertyAnnotation.containsKey(annotatedElement)) {
-					this.annotatedElement2PropertyAnnotation.put(annotatedElement, new ArrayList<>());
+				AssessmentFact annotatedElement = safAnnotation.getAnnotatedElement();
+				if(!this.annotatedElement2SAFAnnotation.containsKey(annotatedElement)) {
+					this.annotatedElement2SAFAnnotation.put(annotatedElement, new ArrayList<>());
 				}
-				this.annotatedElement2PropertyAnnotation.get(annotatedElement).add(propertyAnnotation);
+				this.annotatedElement2SAFAnnotation.get(annotatedElement).add(safAnnotation);
 			}
 		}
 	}
-	
-	public List<PropertyAnnotation> getPropertyAnnotations(AssessmentFact element) {
-		List<PropertyAnnotation> annotations = this.annotatedElement2PropertyAnnotation.get(element);
+
+	public List<SAFAnnotation> getSAFAnnotations(AssessmentFact element) {
+		List<SAFAnnotation> annotations = this.annotatedElement2SAFAnnotation.get(element);
 		if(annotations == null) {
 			return List.of();
 		} else {
 			return annotations;
 		}
 	}
-	
+
 	public Collection<Role> getInvolvedParties() {
-		return this.legalAssessmentFacts.getInvolvedParties();
+		return this.legalAssessmentFacts.getSubjects();
 	}
-	
+
 	public Collection<Purpose> getPurposes() {
-		return this.legalAssessmentFacts.getPurposes();
+		return this.id2PurposeMap.values();
 	}
 	
 	public Collection<LegalBasis> getLegalBases() {
@@ -146,8 +150,8 @@ public class GDPRMetamodelApi {
 		return this.legalAssessmentFacts;
 	}
 	
-	public Optional<ContextDependentProperties> getContextDependentProperties() {
-		return this.optContextDependentProperties;
+	public Optional<ScopeDependentAssessmentFacts> getScopeDependentAssessmentFacts() {
+		return this.optScopeDependentAssessmentFacts;
 	}
 		
 	private void loadGDPRModel(URI gdprModelURI) {
@@ -155,7 +159,7 @@ public class GDPRMetamodelApi {
 	}
 	
 	private void loadContextPropertiesModel(URI contextPropertiesModelURI) {
-		this.optContextDependentProperties = Optional.of((ContextDependentProperties) this.loadResource(contextPropertiesModelURI));		
+		this.optScopeDependentAssessmentFacts = Optional.of((ScopeDependentAssessmentFacts) this.loadResource(contextPropertiesModelURI));
 	}
 	
 	private void resolveResources() {
