@@ -2,54 +2,54 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="contextproperties" nsURI="http://www.example.org/contextproperties"
     nsPrefix="contextproperties">
-  <eClassifiers xsi:type="ecore:EClass" name="ContextDependentProperties" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyannotation" upperBound="-1"
-        eType="#//PropertyAnnotation" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="property" upperBound="-1"
-        eType="#//Property" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contextdefinition" upperBound="-1"
-        eType="#//ContextDefinition" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopeDependentAssessmentFacts" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="safAnnotation" upperBound="-1"
+        eType="#//SAFAnnotation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopeDependentAssessmentFact"
+        upperBound="-1" eType="#//ScopeDependentAssessmentFact" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" upperBound="-1"
+        eType="#//Scope" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyAnnotation" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contextannotation" upperBound="-1"
-        eType="#//ContextAnnotation" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
-        eType="#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SAFAnnotation" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopeSet" upperBound="-1"
+        eType="#//ScopeSet" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopeDependentAssessmentFact"
+        lowerBound="1" eType="#//ScopeDependentAssessmentFact"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotatedElement" lowerBound="1"
         eType="ecore:EClass ../../mdpa.laf.referencemodel/model/LAF.ecore#//AssessmentFact"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ContextAnnotation" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyvalue" lowerBound="1"
-        upperBound="-1" eType="#//PropertyValue"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contextdefinition" lowerBound="1"
-        upperBound="-1" eType="#//ContextDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopeSet" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        upperBound="-1" eType="#//Expression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" lowerBound="1" upperBound="-1"
+        eType="#//Scope"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyvalue" upperBound="-1"
-        eType="#//PropertyValue" containment="true" eOpposite="#//PropertyValue/parentProperty"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopeDependentAssessmentFact" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1"
+        eType="#//Expression" containment="true" eOpposite="#//Expression/parentAssessmentFact"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyValue" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentProperty" lowerBound="1"
-        eType="#//Property" eOpposite="#//Property/propertyvalue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentAssessmentFact" lowerBound="1"
+        eType="#//ScopeDependentAssessmentFact" eOpposite="#//ScopeDependentAssessmentFact/expression"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ContextDefinition" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contextDependentProperties"
-        upperBound="-1" eType="#//ContextDependentContextElement"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="gdprElements" lowerBound="1"
-        upperBound="-1" eType="#//GDPRContextElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Scope" eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionDependentScopeElements"
+        upperBound="-1" eType="#//ExpressionDependentScopeElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lafScopeElements" upperBound="-1"
+        eType="#//LAFScopeElement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ContextElement" abstract="true" interface="true"
+  <eClassifiers xsi:type="ecore:EClass" name="ScopeElement" abstract="true" interface="true"
       eSuperTypes="../../tools.mdsd.modelingfoundations.identifier/model/identifier.ecore#//Entity">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="negated" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ContextDependentContextElement" eSuperTypes="#//ContextElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contextDependentProperty"
-        lowerBound="1" eType="#//PropertyAnnotation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionDependentScopeElement" eSuperTypes="#//ScopeElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="safAnnotation" lowerBound="1"
+        eType="#//SAFAnnotation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GDPRContextElement" eSuperTypes="#//ContextElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="gdprElement" lowerBound="1"
+  <eClassifiers xsi:type="ecore:EClass" name="LAFScopeElement" eSuperTypes="#//ScopeElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lafElement" lowerBound="1"
         eType="ecore:EClass ../../mdpa.laf.referencemodel/model/LAF.ecore#//AssessmentFact"/>
   </eClassifiers>
 </ecore:EPackage>
